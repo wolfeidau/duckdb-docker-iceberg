@@ -13,7 +13,7 @@ DUCKDB_ARCH ?= linux_arm64
 default: download-linux-${ARCH} download-extensions-linux-${ARCH} docker-build
 
 .PHONY: download
-download: download-linux-${ARCH} download-extensions-linux-${ARCH} docker-build
+download: download-linux-${ARCH} download-extensions-linux-${ARCH}
 
 .PHONY: download-linux-${ARCH}
 download-linux-${ARCH}:
