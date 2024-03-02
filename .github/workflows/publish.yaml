@@ -64,7 +64,8 @@ jobs:
         with:
           context: .
           platforms: ${{ matrix.platform }}
-          # tags: ${{ steps.meta.outputs.tags }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             ARCH=${{ env.ARCH }}
