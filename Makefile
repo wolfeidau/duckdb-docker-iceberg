@@ -12,6 +12,9 @@ DUCKDB_ARCH ?= linux_arm64
 .PHONY: default
 default: download-${LINUX_ARCH} download-extensions-${LINUX_ARCH} docker-build
 
+.PHONY: download
+download: download-${LINUX_ARCH} download-extensions-${LINUX_ARCH} docker-build
+
 .PHONY: download-${LINUX_ARCH}
 download-${LINUX_ARCH}:
 	mkdir -p ${DUCKDB_LIB_PATH}/${LINUX_ARCH}
