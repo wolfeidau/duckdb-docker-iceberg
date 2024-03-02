@@ -8,6 +8,10 @@ DUCKDB_LIB_PATH := lib/${DUCKDB_VERSION_TAG}
 
 ARCH ?= aarch64
 
+ifeq ($(ARCH),arm64)
+ARCH := aarch64
+endif
+
 .PHONY: default
 default: download-linux-${ARCH} download-extensions-linux-${ARCH} docker-build
 
