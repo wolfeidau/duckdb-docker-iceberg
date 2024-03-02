@@ -10,8 +10,8 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  LINUX_ARCH: linux_amd64
-  DUCKDB_ARCH: linux-amd64 
+  LINUX_ARCH: linux-amd64
+  DUCKDB_ARCH: linux_amd64 
 
 # There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
 jobs:
