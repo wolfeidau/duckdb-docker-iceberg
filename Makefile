@@ -7,7 +7,6 @@ DUCKDB_EXTENSION_PATH := extensions/${DUCKDB_VERSION_TAG}
 DUCKDB_LIB_PATH := lib/${DUCKDB_VERSION_TAG}
 
 ARCH ?= aarch64
-DUCKDB_ARCH ?= linux_arm64
 
 .PHONY: default
 default: download-linux-${ARCH} download-extensions-linux-${ARCH} docker-build
@@ -24,16 +23,15 @@ download-linux-${ARCH}:
 
 .PHONY: download-extensions-linux-${ARCH}
 download-extensions-linux-${ARCH}:
-	mkdir -p ${DUCKDB_EXTENSION_PATH}/${DUCKDB_ARCH}
-	cd ${DUCKDB_EXTENSION_PATH}/${DUCKDB_ARCH} && \
-		curl -OL ${DUCKDB_EXTENSION_URL}${DUCKDB_ARCH}/iceberg.duckdb_extension.gz && \
-		curl -OL ${DUCKDB_EXTENSION_URL}${DUCKDB_ARCH}/httpfs.duckdb_extension.gz
+	mkdir -p ${DUCKDB_EXTENSION_PATH}/linux_${ARCH}
+	cd ${DUCKDB_EXTENSION_PATH}/linux_${ARCH} && \
+		curl -OL ${DUCKDB_EXTENSION_URL}linux_${ARCH}/iceberg.duckdb_extension.gz && \
+		curl -OL ${DUCKDB_EXTENSION_URL}linux_${ARCH}/httpfs.duckdb_extension.gz
 
 .PHONY: docker-build
 docker-build:
 	docker build -t duckdb-lib-iceberg:${DUCKDB_VERSION_TAG} \
 		--build-arg ARCH=${ARCH} \
-		--build-arg DUCKDB_ARCH=${DUCKDB_ARCH} \
 		--build-arg DUCKDB_VERSION_TAG=${DUCKDB_VERSION_TAG} .
 
 .PHONY: clean
