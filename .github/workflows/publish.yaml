@@ -51,7 +51,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args:
-            ARCH: ${{ env.ARCH }}
-            DUCKDB_ARCH: ${{ env.DUCKDB_ARCH }}
-            DUCKDB_VERSION_TAG: ${{ env.DUCKDB_VERSION_TAG }}
+          build-args: |
+            ARCH=${{ env.ARCH }}
+            DUCKDB_ARCH=${{ env.DUCKDB_ARCH }}
+            DUCKDB_VERSION_TAG=${{ env.DUCKDB_VERSION_TAG }}
