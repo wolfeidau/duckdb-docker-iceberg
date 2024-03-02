@@ -34,7 +34,7 @@ docker-build:
 	docker build -t duckdb-lib-iceberg:${DUCKDB_VERSION_TAG} \
 		--build-arg ARCH=${ARCH} \
 		--build-arg DUCKDB_ARCH=${DUCKDB_ARCH} \
-		--build-arg DUCKDB_VERSION=${DUCKDB_VERSION_TAG} .
+		--build-arg DUCKDB_VERSION_TAG=${DUCKDB_VERSION_TAG} .
 
 .PHONY: clean
 clean:
