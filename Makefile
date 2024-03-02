@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-DUCKDB_VERSION_TAG := v0.10.0
+DUCKDB_VERSION_TAG ?= v0.10.0
 DUCKDB_RELEASE_URL := https://github.com/duckdb/duckdb/releases/download/${DUCKDB_VERSION_TAG}/
 DUCKDB_EXTENSION_URL := http://extensions.duckdb.org/${DUCKDB_VERSION_TAG}/
 DUCKDB_EXTENSION_PATH := extensions/${DUCKDB_VERSION_TAG}

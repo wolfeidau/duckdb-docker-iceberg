@@ -11,7 +11,8 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   ARCH: amd64
-  DUCKDB_ARCH: linux_amd64 
+  DUCKDB_ARCH: linux_amd64
+  DUCKDB_VERSION_TAG: v0.10.0
 
 # There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
 jobs:
@@ -50,3 +51,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args:
+            ARCH: ${{ env.ARCH }}
+            DUCKDB_ARCH: ${{ env.DUCKDB_ARCH }}
+            DUCKDB_VERSION_TAG: ${{ env.DUCKDB_VERSION_TAG }}
