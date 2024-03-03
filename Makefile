@@ -6,10 +6,13 @@ DUCKDB_EXTENSION_URL := http://extensions.duckdb.org/${DUCKDB_VERSION_TAG}/
 DUCKDB_EXTENSION_PATH := extensions/${DUCKDB_VERSION_TAG}
 DUCKDB_LIB_PATH := lib/${DUCKDB_VERSION_TAG}
 
-ARCH ?= aarch64
+ARCH ?= arm64
 
+# work around for duckdb release architecture being different from the extension for arm64
 ifeq ($(ARCH),arm64)
-ARCH := aarch64
+RELARCH := aarch64
+else
+RELARCH := ${ARCH}
 endif
 
 .PHONY: default
@@ -23,7 +26,7 @@ download-linux-${ARCH}:
 	mkdir -p ${DUCKDB_LIB_PATH}/linux-${ARCH}
 	set -ex && source scripts/download.sh && \
 		cd ${DUCKDB_LIB_PATH}/linux-${ARCH} && \
-		unzip-from-link ${DUCKDB_RELEASE_URL}libduckdb-linux-${ARCH}.zip .
+		unzip-from-link ${DUCKDB_RELEASE_URL}libduckdb-linux-${RELARCH}.zip .
 
 .PHONY: download-extensions-linux-${ARCH}
 download-extensions-linux-${ARCH}:
@@ -34,8 +37,7 @@ download-extensions-linux-${ARCH}:
 
 .PHONY: docker-build
 docker-build:
-	docker build -t duckdb-lib-iceberg:${DUCKDB_VERSION_TAG} \
-		--build-arg ARCH=${ARCH} \
+	docker buildx build --platform linux/arm64,linux/amd64 -t duckdb-lib-iceberg:${DUCKDB_VERSION_TAG} \
 		--build-arg DUCKDB_VERSION_TAG=${DUCKDB_VERSION_TAG} .
 
 .PHONY: clean

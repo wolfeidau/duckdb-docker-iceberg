@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 FROM alpine:3.19
 ARG DUCKDB_VERSION_TAG
-ARG ARCH
+ARG TARGETARCH
 
 RUN apk add ca-certificates
-ADD lib/$DUCKDB_VERSION_TAG/linux-$ARCH/libduckdb.so /usr/lib/$ARCH-linux-gnu/
-ADD extensions/$DUCKDB_VERSION_TAG/linux_$ARCH/ /extensions/$DUCKDB_VERSION/linux_$ARCH/
+ADD lib/$DUCKDB_VERSION_TAG/linux-$TARGETARCH/libduckdb.so /usr/lib/$TARGETARCH-linux-gnu/
+ADD extensions/$DUCKDB_VERSION_TAG/linux_$TARGETARCH/ /extensions/$DUCKDB_VERSION_TAG/linux_$TARGETARCH/
